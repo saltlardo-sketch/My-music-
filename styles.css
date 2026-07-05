@@ -1,0 +1,137 @@
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: #14110F; }
+body { font-family: 'Inter', sans-serif; color: #EDE6D6; }
+
+.app {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #3A3128; border-radius: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+input[type="range"] { -webkit-appearance: none; height: 4px; border-radius: 2px; background: #3A3128; outline: none; }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #C9A15A; cursor: pointer; }
+input[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: #C9A15A; border: none; cursor: pointer; }
+
+select { color-scheme: dark; }
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.spinning { animation: spin 6s linear infinite; }
+
+.header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border-bottom: 1px solid #241F19; flex-shrink: 0;
+  padding-top: max(14px, env(safe-area-inset-top));
+}
+.header-left { display: flex; align-items: center; gap: 10px; }
+.wordmark { font-family: 'Fraunces', serif; font-size: 19px; font-weight: 600; }
+.tagline { font-size: 10.5px; color: #8A8070; margin-top: 1px; }
+.add-button {
+  display: flex; align-items: center; gap: 6px;
+  background: #C9A15A; color: #14110F; border: none;
+  padding: 9px 13px; border-radius: 8px; font-size: 13px; font-weight: 600;
+  cursor: pointer;
+}
+
+.body { flex: 1; display: flex; overflow: hidden; }
+
+.sidebar {
+  width: 190px; flex-shrink: 0; border-right: 1px solid #241F19;
+  padding: 16px 12px; overflow-y: auto;
+}
+.section-label {
+  font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px;
+  color: #8A8070; margin-bottom: 8px; font-weight: 600;
+}
+.chip-list { display: flex; flex-direction: column; gap: 6px; }
+.chip {
+  display: flex; justify-content: space-between; align-items: center;
+  background: transparent; border: 1px solid #241F19; color: #D9D0BE;
+  padding: 8px 10px; border-radius: 7px; font-size: 12.5px; cursor: pointer;
+  text-align: left; width: 100%; font-family: inherit;
+}
+.chip.active { background: #241F19; border-color: #C9A15A; color: #EDE6D6; }
+.chip-count { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8A8070; }
+.clear-filter {
+  margin-top: 14px; display: flex; align-items: center; gap: 6px;
+  background: none; border: none; color: #8B3A3A; font-size: 11.5px; cursor: pointer; padding: 0;
+}
+
+.main { flex: 1; overflow-y: auto; padding: 16px 18px; position: relative; }
+.empty {
+  height: 100%; display: flex; flex-direction: column; align-items: center;
+  justify-content: center; text-align: center; gap: 8px; color: #8A8070;
+}
+.empty-title { font-family: 'Fraunces', serif; font-size: 17px; color: #D9D0BE; margin-top: 4px; }
+.empty-body { font-size: 12.5px; max-width: 300px; line-height: 1.5; }
+
+.list-header { font-size: 11.5px; color: #8A8070; margin-bottom: 8px; }
+.row {
+  display: flex; align-items: center; gap: 8px;
+  background: #1A1611; border: 1px solid #241F19; border-radius: 8px;
+  padding: 8px; margin-bottom: 6px;
+}
+.row.active { border-color: #C9A15A; }
+.row-play {
+  background: #241F19; border: none; color: #EDE6D6;
+  width: 26px; height: 26px; border-radius: 6px; display: flex;
+  align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;
+}
+.row-name { flex: 1; font-size: 13px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.row select {
+  background: #14110F; color: #D9D0BE; border: 1px solid #2E2820;
+  border-radius: 6px; font-size: 11.5px; padding: 5px; width: 92px; flex-shrink: 0;
+}
+.row-remove {
+  background: none; border: none; color: #6B6255; cursor: pointer;
+  width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.toast {
+  position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%);
+  background: #241F19; border: 1px solid #C9A15A; color: #EDE6D6;
+  padding: 8px 14px; border-radius: 8px; font-size: 12px; white-space: nowrap;
+}
+
+.player {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 14px; border-top: 1px solid #241F19;
+  background: #1A1611; flex-shrink: 0;
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+.disc-wrap { flex-shrink: 0; }
+.disc {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: radial-gradient(circle at center, #241F19 0 6px, #14110F 6px 8px, #2E2820 8px 18px, #14110F 18px 19px);
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #3A3128;
+}
+.disc-label { width: 11px; height: 11px; border-radius: 50%; background: #C9A15A; }
+.now-playing { width: 130px; flex-shrink: 0; overflow: hidden; }
+.np-title { font-size: 12.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-meta { font-size: 10.5px; color: #8A8070; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.controls { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
+.icon-btn {
+  background: none; border: none; color: #D9D0BE; cursor: pointer;
+  width: 30px; height: 30px; display: flex; align-items: center; justify-content: center;
+}
+.icon-btn.on svg { color: #C9A15A; }
+.play-btn {
+  background: #C9A15A; border: none; color: #14110F; cursor: pointer;
+  width: 34px; height: 34px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+}
+.progress-wrap { flex: 1; display: flex; align-items: center; gap: 6px; min-width: 140px; }
+.time { font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: #8A8070; width: 34px; text-align: center; flex-shrink: 0; }
+.volume { width: 60px; flex-shrink: 0; }
+
+@media (max-width: 520px) {
+  .sidebar { width: 130px; }
+  .now-playing { display: none; }
+  .tagline { display: none; }
+}
